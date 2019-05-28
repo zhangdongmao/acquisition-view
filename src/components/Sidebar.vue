@@ -31,24 +31,24 @@
           <i class="el-icon-location"></i>
           <span>初始化业务元数据</span>
         </template>
-          <el-menu-item index="">获取源系统数据模式</el-menu-item>
-          <el-menu-item index="">获取表及字段信息</el-menu-item>
+          <el-menu-item index="/getSourceSystemSchema">获取源系统数据模式</el-menu-item>
+          <el-menu-item index="/getTabColInfo">获取表及字段信息</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>建表</span>
         </template>
-        <el-menu-item index="">ODS建表</el-menu-item>
-        <el-menu-item index="">DW建表</el-menu-item>
+        <el-menu-item index="/createODSTable">ODS建表</el-menu-item>
+        <el-menu-item index="/createDWTable">DW建表</el-menu-item>
       </el-submenu>
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>脚本生成</span>
         </template>
-        <el-menu-item index="">ODS脚本生成</el-menu-item>
-        <el-menu-item index="">DW建表生成</el-menu-item>
+        <el-menu-item index="/generateODSScript">ODS脚本生成</el-menu-item>
+        <el-menu-item index="/generateDWScript">DW建表生成</el-menu-item>
       </el-submenu>
     </el-menu>
 </template>

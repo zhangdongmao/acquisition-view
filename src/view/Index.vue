@@ -53,7 +53,7 @@ export default {
   }
   .router{
     position: relative;
-    height: 100%;
+    height: 90%;
     width:100%;
     margin-left: 15px;
     margin-right: 20px;
