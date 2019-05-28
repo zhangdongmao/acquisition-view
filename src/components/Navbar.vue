@@ -22,8 +22,17 @@
             <!--<el-menu-item index="2-4-3">选项3</el-menu-item>-->
           <!--</el-submenu>-->
         <!--</el-submenu>-->
+        <el-container class="logo-size">
+          <div id="logo">
+            <img id="img" src="../../static/logo.png" width="80" height="60"/>
+          </div>
+          <div id="logo-font">
+            <span >自动化平台</span>
+          </div>
+        </el-container>
         <el-menu-item index="3">个人中心</el-menu-item>
         <!--<el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
+
       </el-menu>
     </el-col>
   </el-row>
@@ -70,5 +79,16 @@
   /deep/ .el-submenu {
     position: relative;
     height: 100%;
+  }
+  .logo-size{
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  #logo-font{
+    color: white;
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 15px;
+    margin-left: 5px;
   }
 </style>
