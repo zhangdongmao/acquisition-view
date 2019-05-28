@@ -2,26 +2,21 @@
   <div class="table">
     <div class="tool-bar">
       <div class="block"></div>
-      <el-button class="tool-btn" type="primary" size="mini">获取</el-button>
+      <el-button class="tool-btn" type="primary" size="mini" @click="getSchema">获取</el-button>
     </div>
     <hr>
     <el-table
-      :data="schemaList"
+      :data="systemList"
       height="90%"
       style="width: 100%"
       @row-click="clickRow"
-      ref="schemaList"
+      ref="systemList"
       @selection-change="handleSelectionChange"
       :cell-style="cellStyle"
       :header-cell-style="headerCellStyle">
       <el-table-column
         type="selection"
         width="55">
-      </el-table-column>
-      <el-table-column
-        prop="businessSystemID"
-        label="源系统ID"
-        width="180">
       </el-table-column>
       <el-table-column
         prop="businessSystemName"
@@ -32,7 +27,7 @@
         prop="businessSystemNameShortName"
         label="源系统缩写"
         width="180"
-        :filters="[{text: 'mysql', value: 'mysql'}, {text: 'oracle', value: 'oracle'}]"
+        :filters="[{text: 'ERP', value: 'ERP'}, {text: 'DMS', value: 'DMS'}]"
         :filter-method="filterHandler">
       </el-table-column>
     </el-table>
@@ -40,45 +35,27 @@
 </template>
 <script>
   export default {
-    name:'schemaList',
+    name:'systemList',
     data () {
-      var schemaList=[
-        {businessSystemID:'S01',
-          businessSystemName:'企业资源管理规划系统',
+      var systemList=[
+        {businessSystemName:'企业资源管理规划系统',
         businessSystemNameShortName:'ERP'},
-        {businessSystemID:'S02',
-          businessSystemName:'云商DMS系统',
+        {businessSystemName:'云商DMS系统',
           businessSystemNameShortName:'DMS'},
-        {businessSystemID:'S03',
-          businessSystemName:'云商CRM系统',
+        {businessSystemName:'云商CRM系统',
           businessSystemNameShortName:'CRM'},];
       var multipleSelection;
       return {
-        schemaList,
+        systemList,
         multipleSelection,
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
         systemValue: '',
+        fullscreenLoading: false,
       }
     },
     components:{
     },
     created(){
-
+      // getSystemList
     },
     methods:{
       cellStyle({row, column, rowIndex, columnIndex}){
@@ -91,33 +68,56 @@
         const property = column['property'];
         return row[property] === value;
       },
-      getMetaDataList(){
-        this.$axios.post('',)
+      getSystemList(){
+        var systemList=[
+          {businessSystemName:'企业资源管理规划系统',
+            businessSystemNameShortName:'ERP'},
+          {businessSystemName:'云商DMS系统',
+            businessSystemNameShortName:'DMS'},
+          {businessSystemName:'云商CRM系统',
+            businessSystemNameShortName:'CRM'},];
+        this.$axios.post('/',)
           .then(response =>{
 
           })
       },
-      handleCommand(command) {
-        if(command=='addToDevelopList'){
-          this.addToDevelopList()
-        }else if(command=='getDataVolume'){
-          this.getDataVolume()
-        }
+      getSchema(){
+        var data=this.multipleSelection
+        console.log(data)
+        // this.$axios.post('/contrroller/test1',{
+        //   data:data
+        // })
+        //   .then(response =>{
+        //       console.log(response)
+        //   })
+          const loading = this.$loading({
+            lock: true,
+            text: 'Loading',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+          });
+          setTimeout(() => {
+            loading.close();
+          }, 2000);
+        this.$message({
+          message: '查询成功',
+          type: 'error'
+        });
+        this.$refs.systemList.clearSelection();
       },
       clickRow(row){
-        this.$refs.schemaList.toggleRowSelection(row)
+        this.$refs.systemList.toggleRowSelection(row)
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
-        eventBus.$emit('to-getDataVolume',this.multipleSelection)
       },
       toggleSelection(rows) {
         if (rows) {
           rows.forEach(row => {
-            this.$refs.schemaList.toggleRowSelection(row);
+            this.$refs.systemList.toggleRowSelection(row);
           });
         } else {
-          this.$refs.schemaList.clearSelection();
+          this.$refs.systemList.clearSelection();
         }
       },
     }
